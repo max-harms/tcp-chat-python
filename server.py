@@ -1,4 +1,5 @@
 #TCP Chat Server and Client Program
+#This is both a network exercise and a little intro to python for me.
 #Created by Max Harms
 
 import socket
@@ -12,16 +13,17 @@ port = "12345"
 
 def start_server():
     #create the socket using IPV4, TCP socket
-    serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     #bind the socket using the host and port values
-    serv_sock.bind((host, port))
+    s.bind((host, int(port)))
     #wait for data to come in from client
-    cl, addr = serv_sock.accept()
+    cl, addr = s.accept()
 
     with cl:
         #print client connection
-        print("Client has connected: ", addr)
+        #print("Client has connected: ", addr)
         #receive data here
         while True:
             data = cl.recv(1024)
+            print(data)
             cl.sendall(data)
